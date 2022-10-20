@@ -60,12 +60,17 @@ const ChatMessage = props => {
 };
 
 const ChatRoom = () => {
+
   const scrollDownRef = useRef(); 
   const messagesRef = firestore.collection('messages');
   const query = messagesRef.orderBy('createdAt'); // .limit(25)
   const [messages] = useCollectionData(query, { idField: 'id' });
 
   const [formValue, setFormValue] = useState('');
+
+  setTimeout(()=>{
+    Array.from(document.querySelectorAll('.message')).pop().scrollIntoView({behavior: 'smooth'}); 
+  }, 300);
 
 const sendMessage = async (e)=>{
   e.preventDefault();
